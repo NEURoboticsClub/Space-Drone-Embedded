@@ -1,0 +1,15 @@
+services:
+  esp-idf:
+    image: espressif/idf:release-v5.2
+    working_dir: /project
+    volumes:
+      - type: bind
+        source: .
+        target: /project
+    environment:
+      - IDF_TARGET=esp32s3
+      - ESPPORT=/dev/ttyACM0
+    # devices:
+      # - "/dev/ttyACM0:/dev/ttyACM0"
+    stdin_open: true
+
