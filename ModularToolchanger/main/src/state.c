@@ -10,7 +10,7 @@ static state_types_t current_state;
 
 esp_err_t queue_state_transition(state_types_t state)
 {
-    return xQueueSendToFront(state_queue, (void *)state, 0);
+    return xQueueSendToFront(state_queue, (void *)state, portMAX_DELAY);
 }
 
 state_types_t get_current_state()
@@ -24,7 +24,7 @@ void vStateMachine(void *pv_params)
 
     for (;;)
     {
-        if (xQueueReceive(state_queue, &state, 0))
+        if (xQueueReceive(state_queue, &state, portMAX_DELAY))
         {
             current_state = state;
             printf("Transitioning to ");
@@ -61,6 +61,6 @@ esp_err_t state_init()
     state_queue = xQueueCreate(2, sizeof(state_types_t));
 
     // create task which processes changes in this queue
-    xTaskCreate(vStateMachine, "StateMachine", 32 * 8, NULL, 10, &state_task);
+    xTaskCreate(vStateMachine, "StateMachine", 128 * 8, NULL, 10, &state_task);
     return ESP_OK;
 }

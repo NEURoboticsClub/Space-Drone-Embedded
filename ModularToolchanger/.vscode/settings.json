@@ -1,0 +1,12 @@
+{
+    "idf.espIdfPath": "/home/jack/esp/v5.3/esp-idf",
+    "idf.toolsPath": "/home/jack/.espressif",
+    "idf.flashType": "JTAG",
+    "idf.port": "/dev/ttyACM0",
+    "idf.openOcdConfigs": [
+        "board/esp32s3-builtin.cfg"
+    ],
+    "files.associations": {
+        "freertos.h": "c"
+    }
+}
