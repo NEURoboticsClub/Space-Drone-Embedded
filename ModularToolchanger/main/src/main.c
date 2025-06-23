@@ -18,8 +18,8 @@ void app_main(void)
     motor_init(GPIO_NUM_5, GPIO_NUM_6, ADC_UNIT_1, ADC_CHANNEL_3, &motor_handle_a);
 
     // IN 2
-    mt_motor_t motor_handle_b;
-    motor_init(GPIO_NUM_15, GPIO_NUM_16, ADC_UNIT_1, ADC_CHANNEL_6, &motor_handle_b);
+    // mt_motor_t motor_handle_b;
+    // motor_init(GPIO_NUM_15, GPIO_NUM_16, ADC_UNIT_1, ADC_CHANNEL_6, &motor_handle_b);
 
     // IN 3
     mt_motor_t motor_handle_c;
@@ -36,29 +36,46 @@ void app_main(void)
             i = 0;
             printf("ALIVE... FWD\n");
             ESP_ERROR_CHECK(motor_forward(&motor_handle_a));
+         //   ESP_ERROR_CHECK(motor_forward(&motor_handle_b));
+            ESP_ERROR_CHECK(motor_forward(&motor_handle_c));
             vTaskDelay(pdMS_TO_TICKS(2000));
             float current_out;
             ESP_ERROR_CHECK(measure_current(&motor_handle_a, &current_out));
-            printf("CALI AMPS %f\n", current_out);
+            printf("CALI AMPS A%f\n", current_out);
+          //  ESP_ERROR_CHECK(measure_current(&motor_handle_b, &current_out));
+            printf("CALI AMPS B%f\n", current_out);
+            ESP_ERROR_CHECK(measure_current(&motor_handle_c, &current_out));
+            printf("CALI AMPS C%f\n", current_out);
         }
         else if (i >= 2)
         {
             printf("HELLO... BACKWARD\n");
             ESP_ERROR_CHECK(motor_backward(&motor_handle_a));
+           // ESP_ERROR_CHECK(motor_backward(&motor_handle_b));
+            ESP_ERROR_CHECK(motor_backward(&motor_handle_c));
             vTaskDelay(pdMS_TO_TICKS(2000));
             float current_out;
             ESP_ERROR_CHECK(measure_current(&motor_handle_a, &current_out));
-            printf("CALI AMPS %f\n", current_out);
+            printf("CALI AMPS A%f\n", current_out);
+          //  ESP_ERROR_CHECK(measure_current(&motor_handle_b, &current_out));
+            printf("CALI AMPS B%f\n", current_out);
+            ESP_ERROR_CHECK(measure_current(&motor_handle_c, &current_out));
+            printf("CALI AMPS C%f\n", current_out);
         }
         else
         {
             printf("HELLO... SETTLING\n");
-            motor_forward(&motor_handle_c);
             ESP_ERROR_CHECK(motor_stop(&motor_handle_a));
+            //ESP_ERROR_CHECK(motor_stop(&motor_handle_b));
+            ESP_ERROR_CHECK(motor_stop(&motor_handle_c));
             vTaskDelay(pdMS_TO_TICKS(2000));
             float current_out;
             ESP_ERROR_CHECK(measure_current(&motor_handle_a, &current_out));
-            printf("CALI AMPS %f\n", current_out);
+            printf("CALI AMPS A%f\n", current_out);
+            //ESP_ERROR_CHECK(measure_current(&motor_handle_b, &current_out));
+            printf("CALI AMPS B%f\n", current_out);
+            ESP_ERROR_CHECK(measure_current(&motor_handle_c, &current_out));
+            printf("CALI AMPS C%f\n", current_out);
             // IN 1
         }
         i++;
