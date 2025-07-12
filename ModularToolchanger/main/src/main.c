@@ -18,8 +18,8 @@ void app_main(void)
     motor_init(GPIO_NUM_5, GPIO_NUM_6, ADC_UNIT_1, ADC_CHANNEL_3, &motor_handle_a);
 
     // IN 2
-    // mt_motor_t motor_handle_b;
-    // motor_init(GPIO_NUM_15, GPIO_NUM_16, ADC_UNIT_1, ADC_CHANNEL_6, &motor_handle_b);
+    mt_motor_t motor_handle_b;
+    motor_init(GPIO_NUM_15, GPIO_NUM_16, ADC_UNIT_1, ADC_CHANNEL_6, &motor_handle_b);
 
     // IN 3
     mt_motor_t motor_handle_c;
